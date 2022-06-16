@@ -5,3 +5,4 @@ i have completed this task i am not using the DRF due to short time and my offic
 your state is Draft the dropdown shown the active and achieve and the you move active then the dropdown shown the done and achieve 
 and when you are at done dropdown shown only achienve and when to reached on achieve and shown a sms Task completed and you also move
  from any state to achieve then when your task is completed then you can also deleted it succefully
+here the project name is p1 and app name is p2
