@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <title>List</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="jumbotron text-center">
+    <h1>All Tasks</h1>
+    <a type="button" class="btn btn-primary" href="{% url 'add' %}">Add Task</a>
+</div>
+
+
+<div class="container">
+    <h2>All Tasks</h2>
+
+
+    <br>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>State</th>
+            <th>Actions</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for task in tasks %}
+            <tr>
+                <td>{{ task.title }}</td>
+                <td>{{ task.state }}</td>
+                <td>
+                    <div class="dropdown">
+
+                        {% if task.state == "draft" %}
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Change
+                                State
+                                <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li><a href="/change_state?state=active&id={{ task.id }}">active</a></li>
+                                <li><a href="/change_state?state=archived&id={{ task.id }}">archived</a></li>
+                            </ul>
+                        {% elif task.state == "active" %}
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Change
+                                State
+                                <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li><a href="/change_state?state=done&id={{ task.id }}">done</a></li>
+                                <li><a href="/change_state?state=archived&id={{ task.id }}">archived</a></li>
+                            </ul>
+                        {% elif task.state == "archived" %}
+                        <strong>Task completed</strong>
+<!--                        <div class="toast-body">-->
+<!--                             Hello, world! This is a toast message.-->
+<!--                                   </div>-->
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Change
+                                State
+                                <span class="caret"></span></button>
+
+                            {% elif task.state == "done" %}
+
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                Change State
+
+                                <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li><a href="/change_state?state=archived&id={{ task.id }}">archived</a></li>
+                            </ul>
+
+
+
+                        {% endif %}
+
+                    </div>
+                </td>
+                <td> <a type="button" class="btn btn-danger" href="{% url 'delete' task.id %}">Delete</a></td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>
